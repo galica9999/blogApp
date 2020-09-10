@@ -1,3 +1,4 @@
+<%- include('partials/header') %>
 <% blogs.forEach(function(blog){%>
     <div>
         <h2> <%= blog.title %></h2>
@@ -6,3 +7,4 @@
         <p><%=blog.body%></p>
     </div>
 <%});%>
+<%- include('partials/footer') %>
