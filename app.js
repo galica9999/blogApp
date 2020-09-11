@@ -103,6 +103,16 @@ app.put('/blogs/:id', function(req,res){
     })
 });
 
+//destroy route
+app.delete('/blogs/:id', function(req,res){
+    Blog.findByIdAndRemove(req.params.id, function(err, deleted){
+        if(err){
+            console.log(err);
+        } else {
+            res.redirect('/blogs')
+        }
+    })
+})
 
 app.listen(3000, 'localhost', function () {
     console.log('server has started');
