@@ -1,5 +1,6 @@
 var bodyParser  = require('body-parser'),
     methodOverride = require('method-override'),
+    expressSanitizer = require('express-sanitizer'),
     mongoose    = require('mongoose'),
     express     = require('express'),
     app         = express();
@@ -8,6 +9,7 @@ const { StringDecoder } = require('string_decoder');
 
 // APP setup
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressSanitizer);
 app.use(methodOverride("_method"));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
@@ -29,15 +31,6 @@ var blogSchema = new mongoose.Schema({
 
 var Blog = mongoose.model("Blog", blogSchema);
 
-//added test data
-// Blog.create({
-//     title:"Test Blog",
-//     image:"https://images.unsplash.com/photo-1497515114629-f71d768fd07c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-//     body: "this is my test blog, please dont be too harsh on it"
-// })
-
-// ROUTES
-//index
 app.get('/', function(req,res){
     res.redirect('/blogs');
 });
@@ -60,6 +53,7 @@ app.get('/blogs/new', function(req,res){
 
 //create
 app.post('/blogs', function(req,res){
+    req.body.blog.body = req.expressSanitizer(req.body.blog.body);
     Blog.create(req.body.blog, function(err,newBlog){
         if(err){
             res.render('new');
@@ -94,6 +88,7 @@ app.get('/blogs/:id/edit', function(req,res){
 
 //update route
 app.put('/blogs/:id', function(req,res){
+    req.body.blog.body = req.expressSanitizer(req.body.blog.body);
     Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, updatedBlog){
         if(err){
             res.redirect('/blogs');
