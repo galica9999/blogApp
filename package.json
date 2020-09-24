@@ -15,5 +15,10 @@
     "express-sanitizer": "^1.0.5",
     "method-override": "^3.0.0",
     "mongoose": "^5.10.4"
+  },
+  "devDependencies": {
+    "eslint": "^7.9.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0"
   }
 }
