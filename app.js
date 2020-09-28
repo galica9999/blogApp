@@ -55,6 +55,7 @@ app.post("/blogs", function(req, res){
     console.log(req.body);
     console.log("===========")
     console.log(req.body);
+    req.body.blog.body = req.sanitize(req.body.blog.body);
     Blog.create(req.body.blog, function(err, newBlog){
         if(err){
             res.render("new");
