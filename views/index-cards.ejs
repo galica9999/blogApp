@@ -5,14 +5,14 @@
     <div class="ui">
         <% blogs.forEach(function(blog){%>
             <div class="ui fluid raised violet card">
+                <div class="ui centered  rounded big image">
+                    <img src="<%= blog.image %>" alt="">
+                </div>
                 <div class="content">
                     <a class="header" href="/blogs/<%=blog._id%>"> <%= blog.title %></a>
-                </div>
-                <div class="ui centered rounded big image">
-                    <img class="rounding" src="<%= blog.image %>" alt="">
-                </div>
-                <div class="content">
-                    <span class="right floated meta"><%=blog.created%></span>
+                    <div class="meta">
+                        <span><%=blog.created%></span>
+                    </div>
                     <div class="description">
                         <p><%-String(blog.body).substring(0,100)%>...</p>
                     </div>

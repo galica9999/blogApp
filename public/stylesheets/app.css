@@ -9,3 +9,13 @@ i.icon {
 #delete {
     display: inline;
 }
+
+.mt img {
+ padding: 10px 0;
+ background: white;
+ 
+}
+
+.rounding {
+    border-radius: 1px;
+}
